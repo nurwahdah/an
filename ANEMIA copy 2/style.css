@@ -1,0 +1,346 @@
+/* ==========================================
+            PENGATURAN DASAR
+========================================== */
+:root {
+    /* Palet Warna Utama - Lembut & Profesional */
+    --biru-utama: #3B82F6;       /* Biru cerah */
+    --biru-gelap: #1D4ED8;       /* Biru tua */
+    --biru-muda: #EFF6FF;        /* Biru sangat muda untuk latar */
+    --hijau-sehat: #10B981;      /* Hijau untuk status sehat */
+    --kuning-peringatan: #F59E0B;/* Kuning untuk peringatan */
+    --merah-bahaya: #EF4444;     /* Merah untuk risiko tinggi */
+    --abu-terang: #F8FAFC;       /* Latar belakang halaman */
+    --abu-muda: #F1F5F9;         /* Latar kartu/kolom */
+    --abu-batas: #E2E8F0;         /* Garis pemisah */
+    --abu-teks: #64748B;          /* Teks penjelasan */
+    --hitam-lembut: #1E293B;      /* Teks utama */
+    --putih: #FFFFFF;              /* Warna putih */
+
+    /* Ukuran & Bentuk */
+    --lebar-maks: 850px;         /* Lebar konten agar tidak terlalu lebar */
+    --sudut-bulat: 10px;         /* Kelengkungan sudut elemen */
+    --bayangan-standar: 0 2px 12px rgba(0, 0, 0, 0.06);
+    --bayangan-tinggi: 0 4px 16px rgba(59, 130, 246, 0.12);
+
+    /* Jenis Huruf */
+    --font-utama: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-utama);
+    color: var(--hitam-lembut);
+    background-color: var(--abu-terang);
+    line-height: 1.7;
+    padding: 1.5rem;
+    min-height: 100vh;
+}
+
+/* ==========================================
+        KONTAINER UTAMA (PUSAT KONTEN)
+========================================== */
+.dashboard {
+    max-width: var(--lebar-maks);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Jarak antar setiap bagian agar terpisah jelas */
+}
+
+/* Efek Muncul Halus saat Halaman Dimuat */
+.fade-in {
+    animation: muncul 0.6s ease-in-out forwards;
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+@keyframes muncul {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+            HEADER & NAVIGASI
+========================================== */
+header {
+    background: linear-gradient(135deg, var(--biru-utama), var(--biru-gelap));
+    color: var(--putih);
+    padding: 2rem;
+    border-radius: var(--sudut-bulat);
+    box-shadow: var(--bayangan-tinggi);
+    text-align: center;
+}
+
+header h1 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.3px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: var(--putih);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+            KARTU / BLOK KONTEN
+========================================== */
+.card {
+    background-color: var(--putih);
+    border-radius: var(--sudut-bulat);
+    box-shadow: var(--bayangan-standar);
+    padding: 2rem;
+    border-left: 5px solid var(--biru-utama);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Warna khusus untuk kartu Edukasi/Informasi */
+.card.edukasi {
+    border-left-color: var(--hijau-sehat);
+}
+
+.card:hover {
+    box-shadow: var(--bayangan-tinggi);
+}
+
+.card h2 {
+    font-size: 1.35rem;
+    color: var(--biru-utama);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--abu-batas);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.card.edukasi h2 {
+    color: var(--hijau-sehat);
+}
+
+.card p {
+    color: var(--abu-teks);
+    font-size: 1rem;
+    text-align: justify;
+    margin-bottom: 1rem;
+}
+
+.card p:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================
+        PENYESUAIAN KHUSUS DAFTAR NOMOR
+========================================== */
+.card p {
+    counter-reset: nomorUrut hurufUrut;
+    text-align: left;
+}
+
+.card p > b {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--hitam-lembut);
+    line-height: 1.7;
+}
+
+.card p > b::before {
+    content: counter(nomorUrut) ". ";
+    counter-increment: nomorUrut;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+    color: var(--biru-utama);
+    min-width: 24px;
+}
+
+/* Untuk poin huruf di dalam nomor */
+.card p > b > b {
+    display: block;
+    position: relative;
+    padding-left: 38px;
+    margin: 6px 0;
+    font-weight: normal;
+    color: var(--abu-teks);
+}
+
+.card p > b > b::before {
+    content: counter(hurufUrut, lower-alpha) ". ";
+    counter-increment: hurufUrut;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: normal;
+    color: var(--abu-teks);
+    min-width: 24px;
+}
+
+/* ==========================================
+            BENTUK FORM ISIAN
+========================================== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem; /* Jarak antar setiap pertanyaan */
+}
+
+/* Gaya untuk Label / Pertanyaan */
+form label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--hitam-lembut);
+    margin-bottom: 0.3rem;
+    display: block;
+    line-height: 1.6;
+}
+
+/* Gaya untuk Kolom Input Angka */
+form input[type="number"] {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--abu-batas);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--hitam-lembut);
+    background-color: var(--abu-terang);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+form input[type="number"]:focus {
+    border-color: var(--biru-utama);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    background-color: var(--putih);
+}
+
+/* Gaya untuk Kotak Pilihan (Select) */
+form select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--abu-batas);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--hitam-lembut);
+    background-color: var(--abu-terang);
+    transition: all 0.3s ease;
+    outline: none;
+    cursor: pointer;
+    appearance: none; /* Menghilangkan tampilan bawaan agar bisa diatur */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em;
+    padding-right: 2.8rem;
+}
+
+form select:focus {
+    border-color: var(--biru-utama);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    background-color: var(--putih);
+}
+
+/* Gaya untuk Tombol Analisis */
+form button {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--biru-utama), var(--biru-gelap));
+    color: var(--putih);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(29, 78, 216, 0.2);
+}
+
+form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(29, 78, 216, 0.25);
+}
+
+form button:active {
+    transform: translateY(0);
+}
+
+/* ==========================================
+            BAGIAN HASIL ANALISIS
+========================================== */
+#hasilBMI, #hasilTekanan, #hasilAnemia {
+    padding: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 4px solid transparent;
+    line-height: 1.8;
+}
+
+#hasilBMI:last-child, #hasilTekanan:last-child, #hasilAnemia:last-child {
+    margin-bottom: 0;
+}
+
+/* Kelas Warna untuk Status Hasil */
+.status-normal {
+    background-color: #ECFDF5;
+    border-left-color: var(--hijau-sehat);
+    color: #065F46;
+}
+
+.status-peringatan {
+    background-color: #FFFBEB;
+    border-left-color: var(--kuning-peringatan);
+    color: #92400E;
+}
+
+.status-bahaya {
+    background-color: #FEF2F2;
+    border-left-color: var(--merah-bahaya);
+    color: #991B1B;
+}
+
+/* ==========================================
+            TAMPILAN DI HP / LAYAR KECIL
+========================================== */
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+
+    header, .card {
+        padding: 1.5rem;
+    }
+
+    nav a {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}

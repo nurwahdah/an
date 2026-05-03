@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analisis Kemungkinan Anemia pada Perempuan</title>
+  <link rel="stylesheet" href="style.css"> <!-- CSS eksternal -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js -->
+</head>
+<body>
+
+  <!-- Header & Navigasi -->
+  <header>
+    <h1>Analisis Kemungkinan Anemia pada Perempuan</h1>
+    <nav>
+      <a href="#beranda">Beranda</a>
+      <a href="#analisis">Analisis Anemia</a>
+      <a href="#edukasi">Edukasi</a>
+    </nav>
+  </header>
+
+  <!-- Dashboard -->
+  <section id="beranda" class="dashboard fade-in">
+    <div class="card">
+      <h2>Pengantar</h2>
+      <p>Anemia atau yang sering dikenal dengan istilah kurang darah merupakan salah satu masalah kesehatan yang cukup sering dialami oleh perempuan di berbagai usia, mulai dari remaja hingga dewasa. Kondisi ini terjadi ketika tubuh kekurangan sel darah merah sehat atau kadar hemoglobin di dalamnya berada di bawah batas normal. Bagi perempuan, risiko terjadinya anemia cenderung lebih tinggi karena adanya faktor alamiah seperti siklus menstruasi, masa pertumbuhan, serta kebutuhan nutrisi yang lebih besar pada tahap-tahap tertentu kehidupan. Kekurangan zat besi, pola makan yang kurang seimbang, serta gaya hidup yang kurang aktif dapat memperbesar kemungkinan terjadinya gangguan kesehatan ini. Oleh karena itu, pemahaman dini dan deteksi awal sangat diperlukan agar langkah pencegahan dan penanganan yang tepat dapat segera dilakukan.</p>
+    </div>
+
+  <!-- Form Analisis -->
+  <section id="analisis" class="dashboard fade-in">
+    <div class="card">
+      <h2>Yukk Kita Analisis</h2>
+      <form id="formAnalisis">
+        
+        <label for="sistolik">1. Tekanan Darah Sistolik (mmHg) *</label>
+        <input type="number" id="sistolik" required placeholder="Contoh: 120">
+
+        <label for="diastolik">2. Tekanan Darah Diastolik (mmHg) *</label>
+        <input type="number" id="diastolik" required placeholder="Contoh: 80">
+
+        <label for="umur">3. Umur Anda Saat Ini (Tahun)</label>
+        <input type="number" id="umur" placeholder="Contoh: 23">
+
+        <label for="Tinggi">4. Tinggi Badan Anda (Sentimeter)</label>
+        <input type="number" id="Tinggi" step="0.1" placeholder="Contoh: 158.5">
+
+        <label for="Berat badan">5. Berat Badan Anda (Kilogram)</label>
+        <input type="number" id="Berat badan" step="0.1" placeholder="Contoh: 52.5">
+
+        <label for="aktivitas">6. Seberapa Tinggi Aktivitas Fisik Anda Sehari-hari?</label>
+        <select id="aktivitas">
+          <option value="rendah">Rendah → Jarang bergerak atau kurang olahraga</option>
+          <option value="sedang">Sedang → Beraktivitas ringan hingga sedang</option>
+          <option value="tinggi">Tinggi → Banyak bergerak atau olahraga rutin</option>
+        </select>
+
+        <label for="konsumsi">7. Seberapa Sering Anda Makan Makanan Asin / Makanan Instan?</label>
+        <select id="konsumsi">
+          <option value="jarang">Jarang → Kurang dari 1 kali seminggu</option>
+          <option value="sedang">Sedang → Sekitar 1 - 3 kali seminggu</option>
+          <option value="sering">Sering → Lebih dari 3 kali seminggu</option>
+        </select>
+
+        <label for="menstruasi">8. Bagaimana Kondisi Siklus Haid/Menstruasi Anda Saat Ini?</label>
+        <select id="menstruasi">
+          <option value="normal">Normal → Teratur setiap 21 - 35 hari</option>
+          <option value="Panjang → lebih dari 35 hari">Panjang → Lebih dari 35 hari sekali</option>
+          <option value="Pendek → kurang dari 25 hari">Pendek → Kurang dari 25 hari sekali</option>
+          <option value="Tidak menstruasi (amenore) → tidak haid selama beberapa bulan">Tidak haid → Berhenti haid selama ≥3 bulan berturut-turut</option>
+          <option value="tidak teratur">Tidak Teratur → Kadang cepat, kadang lambat, tidak menentu</option>
+        </select>
+
+        <label for="polaMakan">9. Bagaimana Pola Kebiasaan Makan Anda Sehari-hari?</label>
+        <select id="polaMakan">
+          <option value="cukup">Cukup Zat Besi → Sering makan daging merah, hati, ikan, telur, sayuran hijau, kacang-kacangan dan buah</option>
+          <option value="kurang">Kurang Zat Besi → Jarang makan sumber zat besi, sering minum teh/kopi sesudah makan</option>
+        </select>
+
+        <button type="button" onclick="jalankanAnalisis()">🔍 Lakukan Analisis Risiko Anemia</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Hasil Analisis</h2>
+      <div id="hasilBMI"></div>
+      <div id="hasilTekanan"></div>
+      <div id="hasilAnemia"></div>
+    </div>
+
+
+  <!-- Edukasi -->
+  <section id="edukasi" class="dashboard fade-in">
+    <div class="card edukasi">
+      <h2>Tentang Anemia</h2>
+      <p>Anemia atau yang sering disebut dengan istilah kurang darah adalah kondisi medis di mana jumlah sel darah merah atau kadar hemoglobin (protein pembawa oksigen) di dalamnya berada di bawah nilai normal, sehingga tidak cukup untuk memenuhi kebutuhan fisiologis tubuh dalam mengangkut oksigen ke seluruh jaringan dan organ tubuh.</p>
+    </div>
+
+    <div class="card edukasi">
+      <h2>Penyebab Anemia Pada Perempuan</h2>
+      <p>Penyebab utama anemia pada perempuan :<br>
+        <b>Kehilangan darah saat menstruasi berlebihan (Haid terlalu banyak atau terlalu lama dapat menurunkan kadar zat besi)</b>
+        <b>Kurangnya asupan zat besi (Jarang makan daging, sayuran hijau, kacang-kacangan, dll.)</b>
+        <b>Kurang vitamin penting (Kekurangan vitamin B12, asam folat, dan vitamin C dapat menghambat pembentukan sel darah merah)</b>
+        <b>Kehamilan (Kebutuhan zat besi meningkat saat hamil)</b>
+        <b>Pola diet tidak sehat (Diet ekstrem atau sering melewatkan makan)</b>
+        <b>Gangguan penyerapan nutrisi (misalnya gangguan pencernaan tertentu)</b>
+        <b>Penyakit kronis (Penyakit ginjal, infeksi kronis, atau kondisi medis lain)</b>
+        <b>Perdarahan lain (Misalnya luka, operasi, atau gangguan kesehatan tertentu)</b>
+      </p>
+    </div>
+
+    <div class="card edukasi">
+      <h2>Penanganan awal jika berisiko anemia</h2>
+      <p>Perbaiki pola hidup: <br>
+        <b>Konsumsi makanan tinggi zat besi: daging merah, hati, ayam, ikan, bayam, kacang-kacangan. Tambahkan vitamin C agar penyerapan zat besi lebih baik: jeruk, jambu, tomat.</b>
+        <b>Hindari penghambat penyerapan zat besi (Jangan langsung minum teh/kopi tepat sesudah makan)</b>
+        <b>Istirahat cukup dan kelola stres dengan baik</b>
+        <b>Jika sering lemas atau pusing, kurangi aktivitas berat sementara dan perbanyak istirahat</b>
+        <b>Minum tablet tambah darah (sesuai anjuran tenaga kesehatan, terutama untuk remaja putri atau perempuan dengan menstruasi berat)</b>
+        <b>Pantau gejala, Segeralah periksa ke dokter/puskesmas jika mengalami tanda berikut:
+            <b>Lemas sangat berat hingga sulit beraktivitas</b>
+            <b>Pusing berputar atau sering pingsan</b>
+            <b>Sesak napas saat melakukan aktivitas ringan</b>
+            <b>Jantung berdebar-debar tanpa sebab jelas</b>
+            <b>Kulit, bibir, atau kelopak mata terlihat pucat</b>
+            <b>Menstruasi sangat banyak atau berlangsung lama</b>
+            <b>Gejala terus berlanjut meski sudah memperbaiki pola makan</b>
+        </b>
+      </p>
+    </div>
+  </section>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
